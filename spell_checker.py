@@ -94,7 +94,7 @@ class SpellChecker:
         return [match[0] for match in sorted(matches, key=lambda x: x[1])][:num_suggestions]
 
 spell_checker = SpellChecker()
-word = 'សាលា'
+word = 'គោត្តនាល'
 
 print(spell_checker.suggest(word))
 ['គោលនាម', 'គោត្រនាម', 'កិតនាម']
