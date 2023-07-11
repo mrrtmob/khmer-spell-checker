@@ -1,6 +1,4 @@
 from typing import List
-
-
 class Node:
     def __init__(self, word: str, children, parent=None) -> None:
         self.word = word
