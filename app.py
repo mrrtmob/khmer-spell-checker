@@ -1,3 +1,5 @@
+from flask import Flask, redirect, url_for, request
+app = Flask(__name__)
 from khmernltk import word_tokenize
 from spell_checker import SpellChecker
 spell_checker = SpellChecker()
@@ -20,8 +22,19 @@ def correct(str):
 
     return correctWord
 
-while True:
-    print('Enter text:')
-    x = input()
-    print('Correct text:')
-    print(correct(x))
+@app.route('/success/<name>')
+
+def success(name):
+   return 'original: %s' % name + '<br>suggest: %s' % correct(name)
+
+@app.route('/login',methods = ['POST', 'GET'])
+def login():
+   if request.method == 'POST':
+      user = request.form['nm']
+      return redirect(url_for('success',name = user))
+   else:
+      user = request.args.get('nm')
+      return redirect(url_for('success',name = user))
+
+if __name__ == '__main__':
+   app.run(debug = True)
